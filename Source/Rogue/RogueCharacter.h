@@ -10,6 +10,7 @@ struct FInputActionValue;
 class UCameraComponent;
 class USpringArmComponent;
 class UInputAction;
+class ARogueMagicProjectile;
 
 UCLASS()
 class ROGUE_API ARogueCharacter : public ACharacter
@@ -22,11 +23,20 @@ public:
 
 protected:
 	
+	UPROPERTY(VisibleAnywhere, Category="Attack")
+	FName PrimaryAttackSocketName;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Attack")
+	TSubclassOf<ARogueMagicProjectile> PrimaryAttackProjectile;
+	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> MoveAction;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> LookAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> PrimaryAttackAction;
 	
 	UPROPERTY(VisibleAnywhere, Category="CameraComponent")
 	TObjectPtr<UCameraComponent> CameraComponent;
@@ -40,6 +50,8 @@ protected:
 	void Move(const FInputActionValue& InputValue);
 	
 	void Look(const FInputActionValue& InputValue);
+	
+	void PrimaryAttack();
 
 public:
 	// Called every frame

@@ -29,6 +29,7 @@ void ARogueMagicProjectile::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	SphereColliderComponent->OnComponentHit.AddDynamic(this, &ARogueMagicProjectile::OnParticleHit);
+	SphereColliderComponent->IgnoreActorWhenMoving(GetInstigator(), true);
 }
 
 void ARogueMagicProjectile::OnParticleHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
